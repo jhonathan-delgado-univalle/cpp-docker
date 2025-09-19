@@ -36,4 +36,4 @@ USER ${USER}
 
 EXPOSE 2345
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]

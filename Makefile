@@ -21,3 +21,30 @@ gdbserver: all
 
 clean:
 	rm -f $(TARGET) *.o
+
+
+####################### DOCKER #############################
+docker-up:
+	docker-compose down
+	docker-compose up
+
+docker-up-d:
+	docker-compose down
+	docker-compose up -d
+
+docker-down:
+	docker-compose down
+
+docker-up-build:
+	docker-compose down
+	docker-compose up --build
+
+docker-recreate:
+	docker-compose down
+	docker-compose up --build --force-recreate
+
+docker-gdbserver:
+	docker-compose exec cpp-docker make gdbserver
+
+docker-clean:
+	docker-compose exec cpp-docker make clean

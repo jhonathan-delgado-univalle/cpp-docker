@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  cpp-docker:
+    build: .
+    image: cpp-docker:latest
+    volumes:
+      - ./:/home/dev/project
+    ports:
+      - "2345:2345"   # puerto para gdbserver (mapear si vas a attach desde host/VS Code)
+    tty: true
+    # usa el mismo UID que el contenedor para evitar problemas de permisos
+    user: "1000:1000"
+    # command: ["tail", "-f", "/dev/null"]
+    command: ["make", "gdbserver"]
