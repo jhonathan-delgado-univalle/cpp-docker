@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # instalar herramientas C++ + debugging + librerías
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
+    git \
     build-essential \
     gdb \
     gdbserver \
@@ -23,8 +24,9 @@ RUN apt-get update \
     procps \
     # librerías extra
     libcurl4-openssl-dev \
-    nlohmann-json3-dev \
- && rm -rf /var/lib/apt/lists/*
+    nlohmann-json3-dev
+
+# RUN rm -rf /var/lib/apt/lists/*
 
 # crear usuario no-root
 RUN useradd -m -u ${UID} ${USER} \
