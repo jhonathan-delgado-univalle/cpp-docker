@@ -60,3 +60,14 @@ Listening on port 2345
 Waiting for gdb connection...
 ```
 2. En VS Code pulsa **F5**. Se conectará al puerto *2345* y podrás depurar de forma remota.
+
+## 🔹 Google Testing
+Se debe modificar el archivo `tests/test_main.cpp` con los test que requeridos.
+
+Dentro del Dev Container:
+
+```bash
+make google-test       # Ejecuta los test con la librería gtest de google
+```
+
+El binario generado es `test_runner`.

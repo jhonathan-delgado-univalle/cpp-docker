@@ -26,6 +26,13 @@ RUN apt-get update \
     libcurl4-openssl-dev \
     nlohmann-json3-dev
 
+# Instalar GoogleTest
+RUN apt-get install -y libgtest-dev && \
+    cd /usr/src/gtest && \
+    cmake . && \
+    make && \
+    mv lib/*.a /usr/lib
+
 # RUN rm -rf /var/lib/apt/lists/*
 
 # crear usuario no-root

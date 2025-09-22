@@ -20,4 +20,12 @@ gdbserver: all
 	gdbserver :2345 ./$(TARGET)
 
 clean:
-	rm -f $(TARGET) *.o
+	rm -f $(TARGET) $(TEST_BIN) *.o
+
+# GoogleTest build
+TEST_SRC = tests/test_main.cpp
+TEST_BIN = test_runner
+google-test: $(TEST_BIN)
+	./$(TEST_BIN)
+$(TEST_BIN): $(TEST_SRC)
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lgtest -lgtest_main $(LDFLAGS)
