@@ -1,44 +1,47 @@
+/*
+    Proyecto: IMC 
+    Curso: Fundamentos de Programación Orientada a Objetos (FPOO)
+    Universidad del Valle
+
+    Descripción:
+    Este proyecto permite trabajar con:
+    Uso de clases 
+    Uso de bibliotecas
+    Uso de APIs
+    Reutilización de código
+    Software modular y compatibles con otro software
+
+    
+
+    Autor: Victor Bucheli
+    Correo: victor.bucheli@correounivalle.edu.co
+    Fecha: Octubre 2024
+*/
+
 #include <iostream>
-#include <string>
 #include <curl/curl.h>
-#include <nlohmann/json.hpp>
+#include <cmath> // Biblioteca para funciones matemáticas
+#include "Persona.h"
 
-using json = nlohmann::json;
+int main()
+{
 
-static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
-    size_t totalSize = size * nmemb;
-    std::string* buffer = static_cast<std::string*>(userp);
-    buffer->append(static_cast<char*>(contents), totalSize);
-    return totalSize;
-}
+    double peso, altura;
 
-int main() {
-    CURL* curl;
-    CURLcode res;
-    std::string response;
+    // Solicitar datos del usuario
+    std::cout << "Ingrese su peso en kilogramos: ";
+    std::cin >> peso;
 
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "https://jsonplaceholder.typicode.com/todos/1");
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+    std::cout << "Ingrese su altura en metros: ";
+    std::cin >> altura;
 
-        res = curl_easy_perform(curl);
-        if (res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << "\n";
-        }
+    // Crear un objeto de la clase Persona
+    Persona persona(peso, altura);
 
-        curl_easy_cleanup(curl);
-    }
-    curl_global_cleanup();
-
-    try {
-        json j = json::parse(response);
-        std::cout << "Title: " << j["title"] << "\n";
-    } catch (const std::exception& e) {
-        std::cerr << "JSON parse error: " << e.what() << "\n";
-    }
-
+    // Evaluar el IMC utilizando el objeto
+    // persona.evaluarIMC();
+    // persona.calcularIMCAPI();
+    persona.mostrarIMCAPI();
+    //persona.JSON(persona.calcularIMCAPI());
     return 0;
 }
